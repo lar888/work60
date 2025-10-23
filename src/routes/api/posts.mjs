@@ -7,9 +7,9 @@ import {
 	deletePostAPI
 } from '../../controllers/postController.mjs'
 import {
-  validatePostCreateRequest,
-  validatePostPutRequest,
-  validatePostPatchRequest
+	validatePostCreateRequest,
+	validatePostPutRequest,
+	validatePostPatchRequest
 } from '../../middleware/validation.mjs'
 
 const router = Router()

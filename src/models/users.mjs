@@ -5,5 +5,5 @@ let users = cloneInitialUsers()
 
 // Функція для отримання всіх членів команди
 export const getAllUsers = () => {
-  return [...users]
+	return [...users]
 }

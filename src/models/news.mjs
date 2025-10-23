@@ -5,5 +5,5 @@ let news = cloneInitialNews()
 
 // Функція для отримання всіх новин
 export const getAllNews = () => {
-  return [...news]
+	return [...news]
 }

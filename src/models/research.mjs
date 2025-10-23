@@ -5,5 +5,5 @@ let research = cloneInitialResearch()
 
 // Функція для отримання всіх досліджень
 export const getAllResearch = () => {
-  return [...research]
+	return [...research]
 }

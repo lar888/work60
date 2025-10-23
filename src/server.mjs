@@ -11,9 +11,9 @@ const app = express()
 setupGlobalErrorHandlers()
 
 app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
+	origin: 'http://localhost:5173',
+	methods: ['GET', 'POST', 'PUT', 'DELETE'],
+	allowedHeaders: ['Content-Type']
 }))
 
 
@@ -27,21 +27,21 @@ app.use('/', webRouter) // HTML Web Interface
 
 // 404 Handler: JSON для API, EJS для Web
 app.use((req, res, next) => {
-  if (req.path.startsWith('/api/')) {
-    return res.status(404).json({
-      success: false,
-      error: 'API endpoint not found',
-      path: req.originalUrl
-    })
-  }
-  // HTML 404 для Web
-  logger.log(`Сторінку не знайдено: ${req.originalUrl}`)
-  res.status(404).render('404')
+	if (req.path.startsWith('/api/')) {
+		return res.status(404).json({
+			success: false,
+			error: 'API endpoint not found',
+			path: req.originalUrl
+		})
+	}
+	// HTML 404 для Web
+	logger.log(`Сторінку не знайдено: ${req.originalUrl}`)
+	res.status(404).render('404')
 })
 
 // Express error middleware (має бути ПІСЛЯ всіх роутів)
 app.use(expressErrorHandler)
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+	console.log(`Server is running on port ${PORT}`)
 })
