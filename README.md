@@ -202,6 +202,40 @@ Example Response:
 "count": 1
 }
 
+🧭 Additional REST Endpoints (Future Implementation)
+
+In a complete REST API architecture, each data resource can also be accessed individually by its unique identifier (id).
+While the current version provides only list endpoints for /api/news, /api/research, and /api/users,
+the following routes could be added to support detailed item retrieval:
+
+Method Route Description Expected Response
+GET /api/news/:id Returns a single news item by its ID { "success": true, "data": { ...newsItem } }
+GET /api/research/:id Returns a specific research project by ID { "success": true, "data": { ...researchProject } }
+GET /api/users/:id Returns information about a specific team member { "success": true, "data": { ...userProfile } }
+Example
+GET /api/news/1
+
+Response:
+
+{
+"success": true,
+"data": {
+"id": 1,
+"image": "https://picsum.photos/640/480?random=1",
+"date": "2025-01-05",
+"description": "Researchers identify a new protein folding pathway that may explain resilience in neurodegenerative diseases."
+}
+}
+
+If an item with the given ID does not exist, the API should respond with:
+
+{
+"success": false,
+"error": "Resource not found"
+}
+
+These routes would follow the same logging, validation, and error-handling conventions as other controllers, ensuring consistent behavior across the entire application.
+
 ⚠️ Error Handling
 Global Error Middleware
 

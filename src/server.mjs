@@ -3,6 +3,7 @@ import cors from 'cors'
 import apiRouter from './routes/api/index.mjs'
 import webRouter from './routes/web/index.mjs'
 import { expressErrorHandler, setupGlobalErrorHandlers } from './middleware/errorHandlers.mjs'
+import * as logger from './utils/logger.mjs'
 
 const PORT = 3000
 const app = express()
@@ -36,7 +37,7 @@ app.use((req, res, next) => {
 	}
 	// HTML 404 для Web
 	logger.log(`Сторінку не знайдено: ${req.originalUrl}`)
-	res.status(404).render('404')
+	res.status(404).send('<h1>404 - Page Not Found</h1>')
 })
 
 // Express error middleware (має бути ПІСЛЯ всіх роутів)

@@ -1,3 +1,4 @@
+import { HTTP_STATUS } from '../config/http.mjs'
 import {
 	getAllPosts,
 	getPostById,
@@ -14,14 +15,14 @@ export const getPostsAPI = (req, res) => {
 	try {
 		logger.log('API: Отримання списку постів')
 		const list = getAllPosts()
-		res.status(200).json({
+		res.status(HTTP_STATUS.OK).json({
 			success: true,
 			data: list,
 			count: list.length
 		})
 	} catch (error) {
 		logger.error('API: Помилка при отриманні списку постів:', error)
-		res.status(500).json({
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
 			success: false,
 			error: 'Внутрішня помилка сервера'
 		})
@@ -36,20 +37,20 @@ export const getPostAPI = (req, res) => {
 
 		if (!post) {
 			logger.log(`API: Пост з ID ${id} не знайдено`)
-			return res.status(404).json({
+			return res.status(HTTP_STATUS.NOT_FOUND).json({
 				success: false,
 				error: 'Пост не знайдено'
 			})
 		}
 
 		logger.log(`API: Отримання посту з ID ${id}`)
-		res.status(200).json({
+		res.status(HTTP_STATUS.OK).json({
 			success: true,
 			data: post
 		})
 	} catch (error) {
 		logger.error('API: Помилка при отриманні посту:', error)
-		res.status(500).json({
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
 			success: false,
 			error: 'Внутрішня помилка сервера'
 		})
@@ -68,14 +69,14 @@ export const createPostAPI = (req, res) => {
 
 		addPost(post)
 		logger.log('API: Пост успішно створено', post)
-		res.status(201).json({
+		res.status(HTTP_STATUS.CREATED).json({
 			success: true,
 			data: post,
 			message: 'Пост успішно створено'
 		})
 	} catch (error) {
 		logger.error('API: Помилка при створенні посту:', error)
-		res.status(500).json({
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
 			success: false,
 			error: 'Внутрішня помилка сервера'
 		})
@@ -92,21 +93,21 @@ export const updatePostAPI = (req, res) => {
 
 		if (!updatedPost) {
 			logger.log(`API: Пост з ID ${id} не знайдено для оновлення`)
-			return res.status(404).json({
+			return res.status(HTTP_STATUS.NOT_FOUND).json({
 				success: false,
 				error: 'Пост не знайдено'
 			})
 		}
 
 		logger.log('API: Пост успішно оновлено', updatedPost)
-		res.status(200).json({
+		res.status(HTTP_STATUS.OK).json({
 			success: true,
 			data: updatedPost,
 			message: 'Пост успішно оновлено'
 		})
 	} catch (error) {
 		logger.error('API: Помилка при оновленні посту:', error)
-		res.status(500).json({
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
 			success: false,
 			error: 'Внутрішня помилка сервера'
 		})
@@ -123,21 +124,21 @@ export const deletePostAPI = (req, res) => {
 
 		if (!deletedPost) {
 			logger.log(`API: Пост з ID ${id} не знайдено для видалення`)
-			return res.status(404).json({
+			return res.status(HTTP_STATUS.NOT_FOUND).json({
 				success: false,
 				error: 'Пост не знайдено'
 			})
 		}
 
 		logger.log('API: Пост успішно видалено', deletedPost)
-		res.status(200).json({
+		res.status(HTTP_STATUS.OK).json({
 			success: true,
 			data: deletedPost,
 			message: 'Пост успішно видалено'
 		})
 	} catch (error) {
 		logger.error('API: Помилка при видаленні посту:', error)
-		res.status(500).json({
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
 			success: false,
 			error: 'Внутрішня помилка сервера'
 		})
@@ -156,21 +157,21 @@ export const replacePostAPI = (req, res) => {
 
 		if (!replacedPost) {
 			logger.log(`API: Пост з ID ${id} не знайдено для заміни`)
-			return res.status(404).json({
+			return res.status(HTTP_STATUS.NOT_FOUND).json({
 				success: false,
 				error: 'Пост не знайдено'
 			})
 		}
 
 		logger.log('API: Пост успішно оновлено (PUT)', replacedPost)
-		res.status(200).json({
+		res.status(HTTP_STATUS.OK).json({
 			success: true,
 			data: replacedPost,
 			message: 'Пост успішно оновлено'
 		})
 	} catch (error) {
 		logger.error('API: Помилка при PUT оновленні посту:', error)
-		res.status(500).json({
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
 			success: false,
 			error: 'Внутрішня помилка сервера'
 		})

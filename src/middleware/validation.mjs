@@ -101,7 +101,7 @@ export const validatePostPatchRequest = (req, res, next) => {
 	if ('selected' in req.body) updates.selected = Boolean(req.body.selected)
 
 	if (!validatePatchPost(updates)) {
-		return buildErrorResponse(res, 'Невірні дані продукту: перевірте name, price та description')
+		return buildErrorResponse(res, 'Невірні дані посту: перевірте title, description, category, tags, year, image та selected')
 	}
 
 	req.validatedPostUpdates = updates
